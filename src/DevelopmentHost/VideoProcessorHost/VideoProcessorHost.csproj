@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0"/>
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>fd0a46bc-e7bd-4538-b5d5-0c363b15d6ce</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0"/>
+        <PackageReference Include="CommunityToolkit.Aspire.Hosting.Dapr" Version="9.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\VideoScreenshot.MessageConsumer\VideoScreenshot.MessageConsumer.csproj" />
+      <ProjectReference Include="..\MessagePublisher\MessagePublisher.csproj" />
+    </ItemGroup>
+    
+</Project>
