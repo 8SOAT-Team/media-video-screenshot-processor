@@ -1,0 +1,12 @@
+ @MessagePublisher_HostAddress = http://localhost:5166
+
+POST {{MessagePublisher_HostAddress}}/video/start-processing
+Accept: application/json
+Content-Type: application/json
+
+{
+  "processId": "3C72C623-C686-4307-A67F-C0651AFDA082",
+  "VideoName": "fiap.mp4"
+}
+
+###
