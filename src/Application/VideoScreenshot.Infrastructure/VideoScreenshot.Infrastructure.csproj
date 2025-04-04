@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\VideoScreenshot.Application\VideoScreenshot.Application.csproj" />
+        <ProjectReference Include="..\VideoScreenshot.Application\VideoScreenshot.Application.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dapr.Client" Version="1.15.2" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+        <PackageReference Include="Dapr.Client" Version="1.15.2"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2"/>
     </ItemGroup>
 
 </Project>

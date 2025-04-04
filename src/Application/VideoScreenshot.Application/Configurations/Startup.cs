@@ -9,10 +9,10 @@ namespace VideoScreenshot.Application.Configurations;
 [ExcludeFromCodeCoverage]
 public static class Startup
 {
-    public static void AddApplicationPorts(this IServiceCollection services)
+    public static void AddApplicationPorts(this IServiceCollection services, string ffmpegPath)
     {
         services.AddSingleton<ITakeScreenshotService, TakeScreenshotService>();
-        services.AddSingleton(new Engine(@"../../Application/VideoScreenshot.Infrastructure/Components/ffmpeg.exe"));
+        services.AddSingleton<Engine>(_ => new Engine(ffmpegPath));
         services.AddSingleton<IVideoEngineService, VideoEngineService>();
     }
 }

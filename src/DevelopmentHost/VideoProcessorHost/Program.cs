@@ -13,8 +13,8 @@ builder.AddProject<Projects.VideoScreenshot_MessageConsumer>("consumer-processin
     {
         AppId = "processing-video-consumer",
         AppPort = 5148,
-        DaprGrpcPort = 50001,
-        DaprHttpPort = 50002,
+        DaprGrpcPort = 3000,
+        DaprHttpPort = 3001,
         AppMaxConcurrency = 1,
     });
 
