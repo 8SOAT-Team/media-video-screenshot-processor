@@ -24,9 +24,9 @@ public sealed class VideoFileServiceTest
         // Arrange
         var fileInfo = new FileInfo(FakerBr.Faker.System.FilePath());
 
-        // Act
+        //Act
         var result = _videoService.GetDuration(fileInfo);
-
+        
         // Assert
         result.Succeeded.ShouldBeFalse();
         result.Message.ShouldBe("File does not exist");
@@ -40,14 +40,14 @@ public sealed class VideoFileServiceTest
         var mediaFile = new MediaFile
         {
             Duration = TimeSpan.FromSeconds(FakerBr.Faker.Random.Number(1, 60)),
-            Path = fileInfo.FullName
+            Path = fileInfo.VolumeFile.FullName
         };
 
         _videoEngineService.LoadMetadata(Arg.Any<FileInfo>()).Returns(mediaFile);
 
         // Act
-        var result = _videoService.GetDuration(fileInfo);
-
+        var result = _videoService.GetDuration(fileInfo.VolumeFile);
+        
         // Assert
         result.Succeeded.ShouldBeTrue();
         result.Message.ShouldBe("Duration retrieved");
@@ -62,18 +62,18 @@ public sealed class VideoFileServiceTest
         var mediaFile = new MediaFile
         {
             Duration = TimeSpan.FromSeconds(FakerBr.Faker.Random.Number(1, 60)),
-            Path = fileInfo.FullName
+            Path = fileInfo.VolumeFile.FullName
         };
 
         _videoEngineService.LoadMetadata(Arg.Any<FileInfo>()).Returns(mediaFile);
 
         // Act
         var result = await _videoService.GenerateScreenshots(fileInfo);
-
+        
         // Assert
         result.Succeeded.ShouldBeTrue();
         result.Message.ShouldBe("Screenshots generated");
-
+        
         _videoEngineService.Received(1).LoadMetadata(Arg.Any<FileInfo>());
         await _videoEngineService.Received()
             .GetThumbnail(Arg.Any<FileInfo>(), Arg.Any<FileInfo>(), Arg.Any<TimeSpan>());

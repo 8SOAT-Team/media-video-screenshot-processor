@@ -1,8 +1,20 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: snssqs-pubsub
-  namespace: default
+  name: s3bucket # Nome do binding (usado para referenciar no código)
 spec:
-  type: pubsub.in-memory
+  type: bindings.aws.s3 # Tipo do binding
   version: v1
+  metadata:
+    - name: region
+      value: "us-east-1" # Região padrão do LocalStack
+    - name: bucket
+      value: "videobucket" # Nome do bucket
+    - name: endpoint
+      value: "http://localhost:4566" # Endpoint do LocalStack
+    - name: accessKey
+      value: "test" # Credencial fictícia
+    - name: secretKey
+      value: "test" # Credencial fictícia
+    - name: forcePathStyle
+      value: "true"
