@@ -44,6 +44,8 @@ builder.Services
 builder.Services.AddApplicationPorts(appConfiguration!.FfmpegPath);
 builder.Services.AddInfrastructurePorts(appConfiguration);
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 app.UseCloudEvents();
@@ -65,6 +67,9 @@ if (AppConstants.TempFilePath.Exists is false)
 }
 
 // _ = app.Services.GetRequiredService<IOptions<AppConfiguration>>().Value;
+
+
+app.MapHealthChecks("/health");
 
 app.Run();
 
