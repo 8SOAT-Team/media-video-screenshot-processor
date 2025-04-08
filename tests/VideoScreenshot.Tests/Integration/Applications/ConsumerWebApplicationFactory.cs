@@ -47,7 +47,7 @@ public sealed class ConsumerWebApplicationFactory : WebApplicationFactory<Progra
     //     await _sidecar.Start(with => with
     //         .ResourcesPath(Path.Combine(Directory.GetCurrentDirectory(), "Integration/Components"))
     //         .AppPort(AppPort)
-    //         .DaprHttpPort(_daprHttpPort)
+    //         .DaprHttpUrl(_daprHttpPort)
     //         .DaprGrpcPort(_daprGrpcPort)
     //         .Args("--log-level", "debug"));
     // }

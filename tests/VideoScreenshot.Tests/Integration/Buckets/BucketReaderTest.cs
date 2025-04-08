@@ -37,8 +37,8 @@ public class BucketReaderTest : IClassFixture<ConsumerWebApplicationFactory>
         var processId = Guid.NewGuid();
         await using var sidecar = await Sidecar();
         using var client = new DaprClientBuilder()
-            .UseGrpcEndpoint(_configuration.BucketComponentGrpcUrl)
-            .UseHttpEndpoint(_configuration.BucketComponentHttpUrl)
+            .UseGrpcEndpoint(_configuration.DaprGrpcUrl)
+            .UseHttpEndpoint(_configuration.DaprHttpUrl)
             .Build();
 
         var fileContent = await File.ReadAllBytesAsync(Asset.VideoFile.VolumeFile.FullName);
