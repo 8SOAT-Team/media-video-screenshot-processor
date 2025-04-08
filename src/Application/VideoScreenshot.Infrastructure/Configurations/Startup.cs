@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Grpc.Net.Client;
+using Microsoft.Extensions.DependencyInjection;
 using VideoScreenshot.Application.Configurations;
 using VideoScreenshot.Application.Driven.Buckets;
 using VideoScreenshot.Application.Driven.Files;
@@ -21,7 +22,7 @@ public static class Startup
         services.AddSingleton<IBucketWriter, BucketWriter>();
         services.AddSingleton<IPackFileService, PackFileService>();
         services.AddSingleton<IEventBusService, EventBusService>();
-        
+
         services.AddInfrastructureClients(configuration);
     }
 
@@ -29,19 +30,20 @@ public static class Startup
     {
         var daprBucketProxy = DaprClientProxyBuilder.ConfigureBuilder(builder =>
             {
-                builder.UseHttpEndpoint(configuration.BucketComponentHttpUrl);
-                builder.UseGrpcEndpoint(configuration.BucketComponentGrpcUrl);
+                builder.UseHttpEndpoint(configuration.DaprHttpUrl);
+                builder.UseGrpcEndpoint(configuration.DaprGrpcUrl);
             })
             .Build<BucketClientProxy>();
-        
+
         services.AddSingleton<IBucketClientProxy>(daprBucketProxy);
-        
+
         var daprPubSubClientProxy = DaprClientProxyBuilder.ConfigureBuilder(builder =>
             {
-                builder.UseHttpEndpoint("http://localhost:3500");
+                builder.UseHttpEndpoint(configuration.DaprHttpUrl);
+                builder.UseGrpcEndpoint(configuration.DaprGrpcUrl);
             })
             .Build<PubSubClientProxy>();
-        
+
         services.AddSingleton<IPubSubClientProxy>(daprPubSubClientProxy);
     }
 }

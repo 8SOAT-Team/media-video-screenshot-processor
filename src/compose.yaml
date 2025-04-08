@@ -1,0 +1,12 @@
+services:
+  video-processor-host:
+    build:
+      context: ./DevelopmentHost/VideoProcessorHost
+    restart: unless-stopped
+    init: true
+    ports:
+      - "8080:8080"
+    # env_file: ./.env  # Uncomment if .env file exists
+networks:
+  default:
+    driver: bridge

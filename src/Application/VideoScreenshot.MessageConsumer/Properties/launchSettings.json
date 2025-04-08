@@ -8,8 +8,7 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5148",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "AppConfiguration__ffmpegPath": "C:\\codex\\ffmpeg\\bin"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

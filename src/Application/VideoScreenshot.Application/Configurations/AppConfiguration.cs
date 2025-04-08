@@ -10,6 +10,6 @@ public sealed class AppConfiguration
 
     [Required] [MinLength(1)] public string FfmpegPath { get; init; } = null!;
 
-    [Required] [MinLength(1)] public string BucketComponentHttpUrl { get; init; } = null!;
-    [Required] [MinLength(1)] public string BucketComponentGrpcUrl { get; init; } = null!;
+    [Required] [MinLength(1)] public string DaprHttpUrl { get; init; } = null!;
+    [Required] [MinLength(1)] public string DaprGrpcUrl { get; init; } = null!;
 }

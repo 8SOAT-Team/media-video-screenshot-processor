@@ -16,7 +16,14 @@ public class PackFileService : IPackFileService
             destinationFile.Delete();
         }
 
-        ZipFile.CreateFromDirectory(sourceDirectory.FullName, destinationFile.FullName);
+        try
+        {
+            ZipFile.CreateFromDirectory(sourceDirectory.FullName, destinationFile.FullName);
+        }
+        catch (Exception e)
+        {
+            return OperationResult.Fail(e.Message);
+        }
 
         return OperationResult.DefaultSuccessResult;
     }

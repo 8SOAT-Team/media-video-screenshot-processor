@@ -14,7 +14,7 @@ public class VideoFile
         RelatedProcess = relatedProcess;
         FilePackage = new FilePackage
         {
-            SourceDirectory = new DirectoryInfo(VolumeFile.DirectoryName!),
+            SourceDirectory = new DirectoryInfo(ThumbnailPath),
             DestinationFile = new FileInfo(Path.Combine(VolumeFile.DirectoryName!, PackedFileName)),
         };
         Status = VideoFileProcessingStatus.Created;
@@ -56,7 +56,7 @@ public class VideoFile
             throw new ApplicationException("Duration is not set");
         }
 
-        return Duration.Value.Milliseconds switch
+        return Duration.Value.TotalMilliseconds switch
         {
             >= 120_000 => TimeSpan.FromSeconds(20),
             >= 60_000 => TimeSpan.FromSeconds(10),

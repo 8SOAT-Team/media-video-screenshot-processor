@@ -23,7 +23,7 @@ internal sealed class VideoService(IVideoEngineService engine) : IVideoService
         videoFile.SetDuration(duration.Value);
         var interval = videoFile.GetInterval();
         
-        for (var currentTime = TimeSpan.Zero; currentTime < duration.Value; currentTime += interval)
+        for (var currentTime = interval; currentTime < duration.Value; currentTime += interval)
         {
             var result = await TakeScreenshot(videoFile.VolumeFile, outputDirectory, currentTime);
 
@@ -51,7 +51,7 @@ internal sealed class VideoService(IVideoEngineService engine) : IVideoService
     private async Task<OperationResult> TakeScreenshot(FileInfo targetFileInfo, DirectoryInfo outputPath,
         TimeSpan screenshotTime)
     {
-        var outputFile = Path.Combine(outputPath.FullName, VideoFile.ThumbnailOutputNameTemplate.Format(screenshotTime));
+        var outputFile = Path.Combine(outputPath.FullName, VideoFile.ThumbnailOutputNameTemplate.Format(screenshotTime.ToString("hhmmss")));
 
         await engine.GetThumbnail(targetFileInfo, new FileInfo(outputFile), screenshotTime);
 

@@ -23,6 +23,7 @@ if (app.Environment.IsDevelopment())
 app.MapPost("/video/start-processing",
     async ([FromBody] StartVideoProcessingMessage request, [FromServices] DaprClient client) =>
     {
+        Console.WriteLine($"[Publisher] Start processing video: {request.VideoName}");
         await client.PublishEventAsync("snssqs-pubsub", "video-start-processing", request);
     });
 

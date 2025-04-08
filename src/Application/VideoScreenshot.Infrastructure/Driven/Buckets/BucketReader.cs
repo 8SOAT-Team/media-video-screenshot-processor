@@ -33,7 +33,7 @@ public class BucketReader(IBucketClientProxy client) : IBucketReader
             Directory.CreateDirectory(processDirectory);
         }
         
-        var writeTo = Path.Combine(processDirectory, processId.ToString());
+        var writeTo = Path.Combine(processDirectory, fileName.Name);
         await File.WriteAllBytesAsync(writeTo, fileBytes.Data.ToArray());
 
         return OperationResult<FileInfo>.Success(new FileInfo(writeTo), "Download realizado com sucesso");

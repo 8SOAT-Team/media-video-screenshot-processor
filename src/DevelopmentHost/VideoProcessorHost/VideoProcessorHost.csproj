@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Application\VideoScreenshot.Application\VideoScreenshot.Application.csproj" />
       <ProjectReference Include="..\..\Application\VideoScreenshot.MessageConsumer\VideoScreenshot.MessageConsumer.csproj" />
       <ProjectReference Include="..\MessagePublisher\MessagePublisher.csproj" />
     </ItemGroup>
