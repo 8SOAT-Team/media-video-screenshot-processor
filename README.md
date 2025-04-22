@@ -205,6 +205,15 @@ Para que o processamento funcione corretamente, é necessário enviar na mensage
 O arquivo que o service irá procurar deverá ser composto pelo processId e videoName, exemplo: 0EB4FD7B-6B68-44EA-BECF-9FCF95D1D936/meu-video.mp4
 O upload do arquivo compactado gerado com as imagens será feito no mesmo diretório do ProcessId.
 
+O evento final publicado segue o template:
+```json
+{
+  "RequestProcessId": "uuid",
+  "UploadResultSucceeded": true,
+  "UploadResultMessage": "string"
+}
+```
+
 ### Localstack
 
 Para testar localmente, sem a necessidade se se conectar na aws, recomendamos a utilização do projeto [LocalStack](https://docs.localstack.cloud/getting-started/)
