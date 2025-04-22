@@ -5,6 +5,8 @@ micro serviço gestor de processamento de vídeos
 
 Este repositório contém o microserviçode processamento de vídeos, desenvolvido utilizando .NET 8. O processo de build, publicação e deployment funciona via workflow no GitHub Actions.
 
+## Diagrama da Arquitetura de Infraestrutura
+![Diagrama da Arquitetura de Infraestrutura](/FastVideo.drawio.png)
 
 ## Autores
 ### Fiap turma 8SOAT - Grupo 7
