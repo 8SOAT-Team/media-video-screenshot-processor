@@ -32,7 +32,7 @@ Ativa a porta de Process Video Service que é responsável por orquestrar todos 
 
 Um olhar mais detalhado dos componentes e como eles se relacionam:
 
-![Componentes](docs/Componentes.png)
+![Componentes](docs/componentes.png)
 
 ## Diagrama da Arquitetura de Infraestrutura
 ![Diagrama da Arquitetura de Infraestrutura](/docs/FastVideo.drawio.png)
