@@ -34,6 +34,9 @@ Um olhar mais detalhado dos componentes e como eles se relacionam:
 
 ![Componentes](docs/Componentes.png)
 
+## Diagrama da Arquitetura de Infraestrutura
+![Diagrama da Arquitetura de Infraestrutura](/docs/FastVideo.drawio.png)
+
 
 ## Como Executar o Projeto Localmente
 
