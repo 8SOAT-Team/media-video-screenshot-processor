@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pagamentos-api-configmap
+  namespace: fast-order
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ASPNETCORE_URLS: "http://+:5148"
+  AppConfiguration__ffmpegPath: "/usr/bin/ffmpeg"
+  AppConfiguration__DaprHttpUrl: "http://localhost:3000"
+  AppConfiguration__DaprGrpcUrll: "http://localhost:3001"

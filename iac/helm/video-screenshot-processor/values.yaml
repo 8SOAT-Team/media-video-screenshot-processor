@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: bergzado/video-screenshot-processor
+  pullPolicy: Always
+  tag: "0.0.1-beta-01"
+
+containerPort: 5148
+
+livenessProbe:
+  path: /health
+  initialDelaySeconds: 20
+  periodSeconds: 10
+
+readinessProbe:
+  path: /health
+  initialDelaySeconds: 10
+  periodSeconds: 5
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+
+service:
+  type: ClusterIP
+  port: 5148
+
+config:
+  environment: "Production"
+  urls: "http://+:5148"
+  ffmpegPath: "/usr/bin/ffmpeg"
+  daprHttpUrl: "http://localhost:3000"
+  daprGrpcUrl: "http://localhost:3001"

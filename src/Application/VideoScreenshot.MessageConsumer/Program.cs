@@ -17,22 +17,6 @@ builder.Configuration
 var environment = builder.Environment.EnvironmentName;
 Console.WriteLine($"[Startup] ASPNETCORE_ENVIRONMENT: {environment}");
 
-IConfigurationRoot configurationRoot = builder.Configuration;
-
-Console.WriteLine("[Startup] Config sources:");
-foreach (var source in configurationRoot.Providers)
-{
-    Console.WriteLine($"- {source.GetType().Name}");
-}
-
-Console.WriteLine($"[Startup] Config values <{AppConfiguration.ConfigurationSectionName}>:");
-var configItems = builder.Configuration.GetSection(AppConfiguration.ConfigurationSectionName).GetChildren();
-foreach (var item in configItems)
-{
-    Console.WriteLine($"- {item.Key}: {item.Value}");
-}
-
-
 var appConfiguration = builder.Configuration.GetSection(AppConfiguration.ConfigurationSectionName)
     .Get<AppConfiguration>();
 
@@ -43,6 +27,8 @@ builder.Services
 
 builder.Services.AddApplicationPorts(appConfiguration!.FfmpegPath);
 builder.Services.AddInfrastructurePorts(appConfiguration);
+
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -64,7 +50,8 @@ if (AppConstants.TempFilePath.Exists is false)
     AppConstants.TempFilePath.Create();
 }
 
-// _ = app.Services.GetRequiredService<IOptions<AppConfiguration>>().Value;
+
+app.MapHealthChecks("/health");
 
 app.Run();
 

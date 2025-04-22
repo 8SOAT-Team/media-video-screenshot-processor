@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-screenshot-processor-dep
+  namespace: fast-order
+  labels:
+    app: video-screenshot-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: video-screenshot-processor
+  template:
+    metadata:
+      labels:
+        app: video-screenshot-processor
+    spec:
+      containers:
+      - name: video-screenshot-processor-cont
+        image: bergzado/video-screenshot-processor:latest
+        ports:
+        - containerPort: 5148
+        envFrom:
+        - configMapRef:
+            name: video-screenshot-processor-configmap
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5148
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5148
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 3
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
