@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: pagamentos-api-configmap
-  namespace: fast-order
+  name: video-screenshot-processor-configmap
+  namespace: video
 data:
   ASPNETCORE_ENVIRONMENT: "Production"
   ASPNETCORE_URLS: "http://+:5148"
   AppConfiguration__ffmpegPath: "/usr/bin/ffmpeg"
-  AppConfiguration__DaprHttpUrl: "http://localhost:3000"
-  AppConfiguration__DaprGrpcUrll: "http://localhost:3001"
+  AppConfiguration__DaprHttpUrl: "http://localhost:3500"
+  AppConfiguration__DaprGrpcUrl: "http://localhost:50001"

@@ -2,16 +2,15 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: snssqs-pubsub
-  namespace: default
+  namespace: video
 spec:
   type: pubsub.aws.snssqs
   version: v1
   metadata:
-  - name: region
-    value: "us-east-1"
-  - name: accessKey
-    value: "test"
-  - name: secretKey
-    value: "test"
+    - name: region
+      value: "us-east-1"
+    - name: consumerID
+      value: "processing-video-consumer"
 auth:
-  secretStore: ""
+  secretStore: kubernetes
+

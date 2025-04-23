@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: video-screenshot-processor-hpa
-  namespace: video
+  namespace: fast-video
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

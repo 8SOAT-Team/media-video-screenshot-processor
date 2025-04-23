@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: video-screenshot-processor-svc
-  namespace: video
+  namespace: fast-video
 spec:
   selector:
     app: video-screenshot-processor

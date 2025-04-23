@@ -2,9 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: video-screenshot-processor-dep
-  namespace: fast-order
-  labels:
-    app: video-screenshot-processor
+  namespace: fast-video
 spec:
   replicas: 1
   selector:
@@ -14,9 +12,15 @@ spec:
     metadata:
       labels:
         app: video-screenshot-processor
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "processing-video-consumer"
+        dapr.io/app-port: "5148"
+        dapr.io/app-protocol: "http"
     spec:
+      serviceAccountName: notificacao-api-sa
       containers:
-      - name: video-screenshot-processor-cont
+      - name: video-screenshot-processor
         image: bergzado/video-screenshot-processor:latest
         ports:
         - containerPort: 5148
@@ -29,14 +33,12 @@ spec:
             port: 5148
           initialDelaySeconds: 20
           periodSeconds: 10
-          failureThreshold: 3
         readinessProbe:
           httpGet:
             path: /health
             port: 5148
           initialDelaySeconds: 10
           periodSeconds: 5
-          failureThreshold: 3
         resources:
           requests:
             cpu: "100m"
