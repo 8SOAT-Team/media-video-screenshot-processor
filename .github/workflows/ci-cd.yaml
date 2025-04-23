@@ -43,13 +43,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/notificacao-api:latest \
-                       -t ${{ secrets.DOCKER_USERNAME }}/notificacao-api:${{ github.sha }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/processor-api:latest \
+                       -t ${{ secrets.DOCKER_USERNAME }}/proessor-api:${{ github.sha }} .
 
       - name: Push Docker images to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/notificacao-api:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/notificacao-api:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/processor-api:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/processor-api:${{ github.sha }}
 
       - name: Install kubectl
         run: |
