@@ -10,6 +10,7 @@ on:
         options:
           - true
           - false
+
 jobs:
   build-push-deploy:
     runs-on: ubuntu-latest
@@ -27,13 +28,13 @@ jobs:
 
       - name: Restore dependencies
         run: |
-          cd ./Notificacao.Api
-          dotnet restore Notificacao.Api.csproj
+          cd src/Application/VideoScreenshot.MessageConsumer
+          dotnet restore VideoScreenshot.MessageConsumer.csproj
 
       - name: Build and publish
         run: |
-          cd ./Notificacao.Api
-          dotnet publish Notificacao.Api.csproj -c Release -o app/publish /p:UseAppHost=false
+          cd src/Application/VideoScreenshot.MessageConsumer
+          dotnet publish VideoScreenshot.MessageConsumer.csproj -c Release -o /app/publish /p:UseAppHost=false
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -44,7 +45,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/processor-api:latest \
-                       -t ${{ secrets.DOCKER_USERNAME }}/proessor-api:${{ github.sha }} .
+                       -t ${{ secrets.DOCKER_USERNAME }}/processor-api:${{ github.sha }} .
 
       - name: Push Docker images to Docker Hub
         run: |
@@ -59,7 +60,10 @@ jobs:
 
       - name: Install AWS CLI
         run: |
-          sudo snap install aws-cli --classic
+          sudo apt update && sudo apt install -y unzip
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -84,4 +88,4 @@ jobs:
           kubectl apply -f kubernetes/hpa.yaml
           kubectl apply -f dapr/components/s3-component.yaml
           kubectl apply -f dapr/components/sns-component.yaml
-          kubectl rollout status deployment/notificacao-api -n fast-video
+          kubectl rollout status deployment/video-screenshot-processor-dep -n fast-video
