@@ -2,7 +2,7 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: snssqs-pubsub
-  namespace: video
+  namespace: fast-video
 spec:
   type: pubsub.aws.snssqs
   version: v1
