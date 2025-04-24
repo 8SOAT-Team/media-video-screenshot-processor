@@ -76,13 +76,13 @@ jobs:
       - name: Deploy to EKS Cluster
         if: ${{ github.event.inputs.deploy == 'true' }}
         run: |
-          kubectl apply -f kubernetes/namespace.yaml
-          kubectl apply -f kubernetes/service-account.yaml
-          kubectl apply -f kubernetes/configmap.yaml
-          kubectl apply -f kubernetes/secrets.yaml
-          kubectl apply -f kubernetes/deployment.yaml
-          kubectl apply -f kubernetes/service.yaml
-          kubectl apply -f kubernetes/hpa.yaml
-          kubectl apply -f dapr/components/s3-component.yaml
-          kubectl apply -f dapr/components/sns-component.yaml
+          kubectl apply -f iac/kubernetes/namespace.yaml
+          kubectl apply -f iac/kubernetes/service-account.yaml
+          kubectl apply -f iac/kubernetes/configmap.yaml
+          kubectl apply -f iac/kubernetes/secrets.yaml
+          kubectl apply -f iac/kubernetes/deployment.yaml
+          kubectl apply -f iac/kubernetes/service.yaml
+          kubectl apply -f iac/kubernetes/hpa.yaml
+          kubectl apply -f iac/dapr/components/s3-component.yaml
+          kubectl apply -f iac/dapr/components/sns-component.yaml
           kubectl rollout status deployment/video-screenshot-processor-dep -n fast-video
