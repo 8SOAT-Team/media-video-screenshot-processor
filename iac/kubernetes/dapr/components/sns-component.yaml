@@ -10,7 +10,7 @@ spec:
     - name: region
       value: "us-east-1"
     - name: consumerID
-      value: "processing-video-consumer"
+      value: "processing-video-consumer.fifo"
     - name: enableIAM
       value: "true"
 auth:
