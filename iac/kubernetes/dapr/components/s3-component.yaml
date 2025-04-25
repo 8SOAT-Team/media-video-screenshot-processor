@@ -2,7 +2,7 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: s3bucket
-  namespace: video
+  namespace: fast-video
 spec:
   type: bindings.aws.s3
   version: v1
@@ -11,5 +11,7 @@ spec:
       value: "processed-bucket-techchallenge"
     - name: region
       value: "us-east-1"
+    - name: useDefaultCredentialChain
+      value: "true"
 auth:
   secretStore: kubernetes
