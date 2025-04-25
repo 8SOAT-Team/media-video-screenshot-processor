@@ -83,5 +83,6 @@ jobs:
           kubectl apply -f iac/kubernetes/service.yaml
           kubectl apply -f iac/kubernetes/hpa.yaml
           kubectl apply -f iac/kubernetes/dapr/components/s3-component.yaml
+          kubectl apply -f iac/kubernetes/dapr/components/subscription.yaml
           kubectl apply -f iac/kubernetes/dapr/components/sns-component.yaml
           kubectl rollout status deployment/video-screenshot-processor-dep -n fast-video

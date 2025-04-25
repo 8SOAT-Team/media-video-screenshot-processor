@@ -1,0 +1,11 @@
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: video-start-processing-subscription
+  namespace: fast-video
+spec:
+  topic: video-start-processing
+  route: /video-start-processing
+  pubsubname: snssqs-pubsub
+scopes:
+  - processing-video-consumer
