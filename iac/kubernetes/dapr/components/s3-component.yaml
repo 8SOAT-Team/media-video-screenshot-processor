@@ -11,5 +11,7 @@ spec:
       value: "processed-bucket-techchallenge"
     - name: region
       value: "us-east-1"
+    - name: enableIAM
+      value: "true"
 auth:
   secretStore: kubernetes
