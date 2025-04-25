@@ -10,7 +10,6 @@ spec:
     - name: region
       value: "us-east-1"
     - name: consumerID
-      value: "processing-video-consumer"
+      value: "video-screenshot-processor"
 auth:
   secretStore: kubernetes
-
