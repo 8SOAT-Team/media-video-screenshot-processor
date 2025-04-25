@@ -2,10 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: video-screenshot-processor-configmap
-  namespace: video
+  namespace: fast-video
 data:
   ASPNETCORE_ENVIRONMENT: "Production"
   ASPNETCORE_URLS: "http://+:5148"
   AppConfiguration__ffmpegPath: "/usr/bin/ffmpeg"
   AppConfiguration__DaprHttpUrl: "http://localhost:3500"
   AppConfiguration__DaprGrpcUrl: "http://localhost:50001"
+  AppConfiguration__QueueUrl: "https://sqs.us-east-1.amazonaws.com/585008076257/processing-video-consumer.fifo"
+  AppConfiguration__MaxMessages: "1"
+  AppConfiguration__LongPollTimeSeconds: "5"
+  AppConfiguration__S3BucketName: "processed-bucket-techchallenge"
+  AppConfiguration__PublishEventQueueUrl: "https://sqs.us-east-1.amazonaws.com/585008076257/notification-queue.fifo"
