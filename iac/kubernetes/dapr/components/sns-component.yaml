@@ -2,7 +2,7 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: snssqs-pubsub
-  namespace: video
+  namespace: fast-video
 spec:
   type: pubsub.aws.snssqs
   version: v1
@@ -10,7 +10,6 @@ spec:
     - name: region
       value: "us-east-1"
     - name: consumerID
-      value: "processing-video-consumer"
+      value: "processing-video-consumer.fifo"
 auth:
   secretStore: kubernetes
-
