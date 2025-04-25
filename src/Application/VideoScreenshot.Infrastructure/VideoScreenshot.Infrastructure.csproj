@@ -11,6 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AWSSDK.S3" Version="3.7.416.15" />
+        <PackageReference Include="AWSSDK.SQS" Version="3.7.400.139" />
         <PackageReference Include="Dapr.Client" Version="1.15.2"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2"/>
     </ItemGroup>

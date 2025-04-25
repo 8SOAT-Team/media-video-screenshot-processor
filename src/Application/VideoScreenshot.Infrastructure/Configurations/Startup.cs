@@ -1,4 +1,6 @@
-﻿using Grpc.Net.Client;
+﻿using Amazon;
+using Amazon.Runtime;
+using Amazon.S3;
 using Microsoft.Extensions.DependencyInjection;
 using VideoScreenshot.Application.Configurations;
 using VideoScreenshot.Application.Driven.Buckets;
@@ -22,28 +24,25 @@ public static class Startup
         services.AddSingleton<IBucketWriter, BucketWriter>();
         services.AddSingleton<IPackFileService, PackFileService>();
         services.AddSingleton<IEventBusService, EventBusService>();
+        services.AddSingleton<IBucketClientProxy, BucketClientProxy>();
 
         services.AddInfrastructureClients(configuration);
     }
 
     private static void AddInfrastructureClients(this IServiceCollection services, AppConfiguration configuration)
     {
-        var daprBucketProxy = DaprClientProxyBuilder.ConfigureBuilder(builder =>
+        services.AddSingleton<IAmazonS3>(_ =>
+        {
+            var config = new AmazonS3Config
             {
-                builder.UseHttpEndpoint(configuration.DaprHttpUrl);
-                builder.UseGrpcEndpoint(configuration.DaprGrpcUrl);
-            })
-            .Build<BucketClientProxy>();
+                ServiceURL = "http://localhost:4566", // LocalStack
+                ForcePathStyle = true,
+                RegionEndpoint = RegionEndpoint.USEast1
+            };
 
-        services.AddSingleton<IBucketClientProxy>(daprBucketProxy);
+            var credentials = new BasicAWSCredentials("test", "test");
 
-        var daprPubSubClientProxy = DaprClientProxyBuilder.ConfigureBuilder(builder =>
-            {
-                builder.UseHttpEndpoint(configuration.DaprHttpUrl);
-                builder.UseGrpcEndpoint(configuration.DaprGrpcUrl);
-            })
-            .Build<PubSubClientProxy>();
-
-        services.AddSingleton<IPubSubClientProxy>(daprPubSubClientProxy);
+            return new AmazonS3Client(credentials, config);
+        });
     }
 }

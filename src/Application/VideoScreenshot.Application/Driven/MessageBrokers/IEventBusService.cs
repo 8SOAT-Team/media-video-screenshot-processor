@@ -1,6 +1,8 @@
-﻿namespace VideoScreenshot.Application.Driven.MessageBrokers;
+﻿using VideoScreenshot.Domain.Results;
+
+namespace VideoScreenshot.Application.Driven.MessageBrokers;
 
 public interface IEventBusService
 {
-    Task Publish<T>(T message, CancellationToken cancellation = default);
+    Task<OperationResult> Publish<T>(T message, CancellationToken cancellation = default);
 }

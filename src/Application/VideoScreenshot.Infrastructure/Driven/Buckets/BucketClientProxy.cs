@@ -1,16 +1,31 @@
-﻿using Dapr.Client;
+﻿using Amazon.S3;
+using Amazon.S3.Model;
+using VideoScreenshot.Domain.Results;
 using VideoScreenshot.Infrastructure.Driven.Buckets.Clients;
 
 namespace VideoScreenshot.Infrastructure.Driven.Buckets;
 
-public sealed class BucketClientProxy(DaprClient client) : DaprClientProxy(client), IBucketClientProxy;
-public sealed class PubSubClientProxy(DaprClient client) : DaprClientProxy(client), IPubSubClientProxy
+public sealed class BucketClientProxy(IAmazonS3 amazonS3) : IBucketClientProxy
 {
-    private readonly DaprClient _client = client;
-
-    public Task PublishEventAsync<TData>(string pubsubName, string topicName, TData data,
-        CancellationToken cancellationToken = default)
+    public async Task DownloadToFilePathAsync(string bucketName, string key, string destinationPath)
     {
-        return _client.PublishEventAsync(pubsubName, topicName, data, cancellationToken);
+       await amazonS3.DownloadToFilePathAsync(bucketName, key, destinationPath, null);
+    }
+
+    public async Task<OperationResult> UploadFileAsync(string bucketName, string key, string filePath, string contentType)
+    {
+        var request = new PutObjectRequest
+        {
+            BucketName = bucketName,
+            Key = key,
+            FilePath = filePath,
+            ContentType = contentType
+        };
+
+        var response = await amazonS3.PutObjectAsync(request);
+
+        return ((int)response.HttpStatusCode) >= 200 && ((int)response.HttpStatusCode) < 300
+            ? OperationResult.Success("Upload realizado com sucesso")
+            : OperationResult.Fail("Falha ao realizar o upload");
     }
 }
