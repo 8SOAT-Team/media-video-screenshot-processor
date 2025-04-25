@@ -12,4 +12,11 @@ public sealed class AppConfiguration
 
     [Required] [MinLength(1)] public string DaprHttpUrl { get; init; } = null!;
     [Required] [MinLength(1)] public string DaprGrpcUrl { get; init; } = null!;
+    
+    public string QueueUrl { get; init; } = null!;
+    public int MaxMessages { get; set; }
+    public int LongPollTimeSeconds { get; set; }
+    
+    public string S3BucketName { get; init; } = null!;
+    public string PublishEventQueueUrl { get; init; } = null!;
 }

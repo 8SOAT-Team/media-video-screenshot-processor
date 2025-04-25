@@ -1,12 +1,9 @@
-﻿namespace VideoScreenshot.Infrastructure.Driven.Buckets.Clients;
+﻿using VideoScreenshot.Domain.Results;
 
-public interface IBucketClientProxy : IDaprClientProxy;
+namespace VideoScreenshot.Infrastructure.Driven.Buckets.Clients;
 
-public interface IPubSubClientProxy : IDaprClientProxy
+public interface IBucketClientProxy
 {
-    Task PublishEventAsync<TData>(
-        string pubsubName,
-        string topicName,
-        TData data,
-        CancellationToken cancellationToken = default);
+    Task DownloadToFilePathAsync(string bucketName, string key, string destinationPath);
+    Task<OperationResult> UploadFileAsync(string bucketName, string key, string filePath, string contentType);
 }
