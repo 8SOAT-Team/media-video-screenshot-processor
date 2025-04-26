@@ -9,3 +9,7 @@ data:
   AppConfiguration__ffmpegPath: "/usr/bin/ffmpeg"
   AppConfiguration__DaprHttpUrl: "http://localhost:3500"
   AppConfiguration__DaprGrpcUrl: "http://localhost:50001"
+  AppConfiguration__PubSubComponent: "snssqs-pubsub"
+  AppConfiguration__QueueUrl: "https://sqs.us-east-1.amazonaws.com/585008076257/processing-video-consumer.fifo"
+  AppConfiguration__MaxMessages: "1"
+  AppConfiguration__LongPollTimeSeconds: "5"
