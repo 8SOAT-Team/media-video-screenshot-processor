@@ -4,7 +4,7 @@ metadata:
   name: video-start-processing-subscription
   namespace: fast-video
 spec:
-  topic: processing-video-consumer.fifo
+  topic: video-start-processing.fifo
   route: /video-start-processing
   pubsubname: snssqs-pubsub
 scopes:
