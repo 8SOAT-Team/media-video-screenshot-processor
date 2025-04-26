@@ -9,4 +9,3 @@ data:
   AppConfiguration__ffmpegPath: "/usr/bin/ffmpeg"
   AppConfiguration__DaprHttpUrl: "http://localhost:3500"
   AppConfiguration__DaprGrpcUrl: "http://localhost:50001"
-  AppConfiguration__PubSubComponent: "snssqs-pubsub"
