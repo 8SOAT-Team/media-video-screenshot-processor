@@ -9,9 +9,5 @@ spec:
   metadata:
     - name: region
       value: "us-east-1"
-    - name: consumerID
-      value: "processing-video-consumer"
     - name: enableIAM
       value: "true"
-auth:
-  secretStore: kubernetes
