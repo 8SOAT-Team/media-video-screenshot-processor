@@ -13,7 +13,7 @@ public class SqsConsumerService : BackgroundService
     private readonly AppConfiguration _settings;
     private readonly ILogger<SqsConsumerService> _logger;
     private readonly ITakeScreenshotService _takeScreenshotService;
-    private const string QueueName = "video-start-processing";
+    private const string QueueName = "video-start-processing.fifo";
 
     public SqsConsumerService(
         IAmazonSQS sqsClient,
