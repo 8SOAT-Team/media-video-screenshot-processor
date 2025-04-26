@@ -10,7 +10,7 @@ spec:
   ports:
     - port: 80
       name: http
-      targetPort: 5148   # direciona para aplicação ASP.NET Core
+      targetPort: 5148
 
 ---
 apiVersion: v1
@@ -25,4 +25,4 @@ spec:
   ports:
     - port: 80
       name: http
-      targetPort: 3500   # direciona para API HTTP do Dapr Sidecar
+      targetPort: 3500
